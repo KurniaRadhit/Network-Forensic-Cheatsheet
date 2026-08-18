@@ -148,19 +148,25 @@ tshark -r capture.pcap -Y "frame.time >= \"2026-01-01 00:00:00\" && frame.time <
 ```
 Buka capture → Protocol Hierarchy (§1.2)
 │
-├─ HTTP/HTTPS dominan? ──────────────→ Bab 2
-├─ DNS dengan volume/pola aneh? ─────→ Bab 3
-├─ FTP/Telnet/SSH terlihat? ─────────→ Bab 4
-├─ ICMP dengan payload besar/aneh? ──→ Bab 5
-├─ SMB/traffic Windows domain? ──────→ Bab 6
-├─ USB capture (usbmon/USBPcap)? ────→ Bab 7
-├─ SMTP/POP3/IMAP? ──────────────────→ Bab 8
-├─ SIP/RTP? ──────────────────────────→ Bab 9
-├─ Banyak "Data" tak dikenal? ───────→ Bab 10
+├─ Mau pahami dulu perilaku TCP/UDP level bawah
+│  (handshake, flags aneh, stream tanpa protokol
+│  aplikasi dikenali)? ──────────────→ Bab 2
+├─ HTTP/HTTPS dominan? ──────────────→ Bab 3
+├─ DNS dengan volume/pola aneh? ─────→ Bab 4
+├─ FTP/Telnet/SSH terlihat? ─────────→ Bab 5
+├─ ICMP dengan payload besar/aneh? ──→ Bab 6
+├─ SMB/traffic Windows domain? ──────→ Bab 7
+├─ USB capture (usbmon/USBPcap)? ────→ Bab 8
+├─ SMTP/POP3/IMAP? ──────────────────→ Bab 9
+├─ SIP/RTP? ──────────────────────────→ Bab 10
+├─ Banyak "Data" tak dikenal di atas
+│  TCP/UDP (custom protocol)? ───────→ Bab 11
 ├─ Ada indikasi data terenkripsi
-│  (entropy tinggi, pola XOR, dsb)? ─→ Bab 11
-└─ 802.11/WiFi capture? ─────────────→ Bab 12
+│  (entropy tinggi, pola XOR, dsb)? ─→ Bab 12
+└─ 802.11/WiFi capture? ─────────────→ Bab 13
 ```
+
+💡 **Tip navigasi**: Bab 2 (TCP/UDP) sebaiknya tetap dilirik sekilas walau soal jelas-jelas soal HTTP/DNS/dsb, karena anomali di level transport (retransmission aneh, RST tidak wajar, sequence number janggal) kadang jadi petunjuk tambahan yang terlewat kalau langsung loncat ke bab protokol aplikasi.
 
 💡 **Tip**: Soal CTF sering menggabungkan lebih dari satu bab sekaligus — misal DNS tunneling (§3) yang isinya ternyata data ter-XOR (§11), atau HTTP (§2) yang membawa custom binary protocol di body-nya (§10). Jangan berhenti di satu bab kalau hasil ekstraksi masih terlihat "acak" atau tidak langsung terbaca.
 
@@ -178,4 +184,4 @@ Buka capture → Protocol Hierarchy (§1.2)
 
 ---
 
-**Selanjutnya**: §2 — HTTP/HTTPS, membahas extract file, follow stream, decrypt TLS via keylog, dan credential/header hunting.
+**Selanjutnya**: §2 — TCP/UDP, membahas analisis handshake, TCP flags anomali, stream reassembly manual, dan karakteristik UDP sebelum masuk ke protokol aplikasi spesifik.
