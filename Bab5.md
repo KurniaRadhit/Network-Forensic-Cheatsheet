@@ -14,6 +14,7 @@ Sebelum curiga tunneling, pahami dulu pola DNS normal: query pendek, ke banyak d
 
 ```bash
 tshark -r capture.pcap -Y "dns" -T fields -e dns.qry.name -e dns.qry.type | sort | uniq -c | sort -rn | head -30
+atau tshark -r capture.pcap -Y "dns" -T fields -e dns.qry.name | sort | uniq 
 ```
 
 Yang dicari:
