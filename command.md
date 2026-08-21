@@ -418,3 +418,5 @@ for pkt in data:
 ---
 
 Cheatsheet ini akan terus relevan seiring bab-bab lain di series ditulis — kalau ada filter/command yang sering dipakai di Bab 13 (Cryptography-in-Traffic) atau Bab 14 (Wireless) nanti, bisa ditambahkan ke sini juga.
+![Uploading image.png…]()
+
